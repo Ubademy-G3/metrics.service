@@ -68,7 +68,7 @@ jobs:
         run: heroku container:login
 
       - name: Tag container
-        run: docker tag courses.service registry.heroku.com/staging-metrics-service/web
+        run: docker tag metrics.service registry.heroku.com/staging-metrics-service/web
 
       - name: Push container
         run: docker push registry.heroku.com/staging-metrics-service/web
