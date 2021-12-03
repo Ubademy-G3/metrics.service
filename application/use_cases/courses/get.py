@@ -35,7 +35,7 @@ def get_metrics_by_id(course_id):
 
 def get_metrics():
 
-    response_courses = requests.get("https://staging-courses-service-app.herokuapp.com/courses/",
+    response_courses = requests.get(COURSES_SERVICE_URL,
                                     headers = header_courses)
     courses_json = response_courses.json()
     result_list = []
