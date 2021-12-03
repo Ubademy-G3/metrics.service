@@ -5,16 +5,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 COURSES_SERVICE_API_KEY = os.getenv('COURSES_SERVICE_API_KEY')
-COURSES_SERVICE_URL = os.getenv('COURSES_SERVICE_URL')
+COURSES_SERVICE_URL = "https://staging-courses-service-app.herokuapp.com/courses/"
 
 EXAMS_SERVICE_API_KEY = os.getenv('EXAMS_SERVICE_API_KEY')
-EXAMS_SERVICE_URL = os.getenv('EXAMS_SERVICE_URL')
+EXAMS_SERVICE_URL = "https://staging-exams-service.herokuapp.com/exams/solutions/course/"
 
 header_courses = {"apikey": COURSES_SERVICE_API_KEY}
 header_exams = {"apikey": EXAMS_SERVICE_API_KEY}
 
 def get_metrics_by_id(course_id):
 
+    
     response_courses = requests.get(COURSES_SERVICE_URL+course_id+"/metrics/",
                             headers = header_courses)
 
@@ -34,7 +35,7 @@ def get_metrics_by_id(course_id):
 
 def get_metrics():
 
-    response_courses = requests.get(COURSES_SERVICE_URL,
+    response_courses = requests.get("https://staging-courses-service-app.herokuapp.com/courses/",
                                     headers = header_courses)
     courses_json = response_courses.json()
     result_list = []

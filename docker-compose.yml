@@ -11,10 +11,6 @@ services:
       - 8002:8000
     environment:
       - DATABASE_URL=postgresql://hello_fastapi:hello_fastapi@db/hello_fastapi_dev
-      - USERS_SERVICE_URL = "https://staging-users-service.herokuapp.com/users"
-      - PAYMENTS_SERVICE_URL = "as"
-      - COURSES_SERVICE_URL = "https://staging-courses-service-app.herokuapp.com/courses/"
-      - EXAMS_SERVICE_URL = "https://staging-exams-service.herokuapp.com/exams/solutions/course/"
     depends_on:
       - db
     networks:
