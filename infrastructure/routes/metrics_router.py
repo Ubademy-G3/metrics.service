@@ -15,7 +15,7 @@ async def get_courses_metrics_by_id(course_id: str,
     auth_service.check_api_key(apikey)
     return CoursesController.get_metrics_by_id(course_id)
 
-@router.get('/courses/', response_model = dict, status_code = 200)
+@router.get('/courses/', status_code = 200)
 async def get_all_courses_metrics(apikey: str = Header(None)):
 
     auth_service.check_api_key(apikey)

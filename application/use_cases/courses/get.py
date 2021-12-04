@@ -16,21 +16,24 @@ header_exams = {"apikey": EXAMS_SERVICE_API_KEY}
 def get_metrics_by_id(course_id):
 
     
-    response_courses = requests.get(COURSES_SERVICE_URL+course_id+"/metrics/",
+    response_courses = requests.get(COURSES_SERVICE_URL+course_id,
                             headers = header_courses)
 
     response_exams = requests.get(EXAMS_SERVICE_URL+course_id,
                                     headers = header_exams)
     
-    courses_json = response_courses.json()
+    courses_json = response_courses.json()['metrics']
     exams_json = response_exams.json()
-    courses_json['metrics']['exams_amount'] = exams_json['amount']
-    courses_json['metrics']['average_score'] = exams_json['average_score']
-    courses_json['metrics']['approval_rate'] = exams_json['approval_rate']
-    courses_json['metrics']['graded_exams'] = exams_json['amount_graded']
-    courses_json['metrics']['passed_exams'] = exams_json['approval_rate'] * exams_json['amount']
+    courses_json['exams_amount'] = exams_json['amount']
+    courses_json['average_score'] = exams_json['average_score']
+    courses_json['approval_rate'] = exams_json['approval_rate']
+    courses_json['graded_exams'] = exams_json['amount_graded']
+    courses_json['passed_exams'] = exams_json['approval_rate'] * exams_json['amount']
     
-    return courses_json
+    return {
+        "course_id": course_id,
+        "metrics": courses_json
+    }    
 
 
 def get_metrics():
@@ -38,11 +41,33 @@ def get_metrics():
     response_courses = requests.get(COURSES_SERVICE_URL,
                                     headers = header_courses)
     courses_json = response_courses.json()
-    result_list = []
+    dicc = {"total_users": 0,
+            "users_approved": 0,
+            "users_currently_studying": 0,
+            "exams_amount": 0,
+            "average_score": 0,
+            "approval_rate": 0,
+            "graded_exams": 0,
+            "passed_exams": 0
+        }
+
     for course in courses_json['courses']:
-        c_id = course['id']
-        course_metrics = get_metrics_by_id(c_id)
-        result_list.append(course_metrics)
     
-    return result_list
+        response_exams = requests.get(EXAMS_SERVICE_URL+course['id'],
+                                    headers = header_exams)
+        exams_json = response_exams.json()
+        dicc['total_users'] += course['metrics']['total_users']
+        dicc['users_approved'] += course['metrics']['users_approved']
+        dicc['users_currently_studying'] += course['metrics']['users_currently_studying']
+        dicc['exams_amount'] += exams_json['amount']
+        dicc['average_score'] += exams_json['average_score']
+        dicc['approval_rate'] += exams_json['approval_rate']
+        dicc['graded_exams'] += exams_json['amount_graded']
+        dicc['passed_exams'] += exams_json['approval_rate'] * exams_json['amount']
+    
+    return {
+        "courses_amount": courses_json['amount'],
+        "metrics": dicc
+    }
+
     
