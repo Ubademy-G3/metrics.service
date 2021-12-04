@@ -7,7 +7,7 @@ from application.services.auth import auth_service
 router = APIRouter()
 
 #Courses
-@router.get('/courses/{course_id}', status_code = 200)
+@router.get('/courses/{course_id}', response_model = dict, status_code = 200)
 async def get_courses_metrics_by_id(course_id: str,
                                 apikey: str = Header(None)
                             ):
@@ -15,7 +15,7 @@ async def get_courses_metrics_by_id(course_id: str,
     auth_service.check_api_key(apikey)
     return CoursesController.get_metrics_by_id(course_id)
 
-@router.get('/courses/', status_code = 200)
+@router.get('/courses/', response_model = dict, status_code = 200)
 async def get_all_courses_metrics(apikey: str = Header(None)):
 
     auth_service.check_api_key(apikey)
@@ -23,7 +23,7 @@ async def get_all_courses_metrics(apikey: str = Header(None)):
 
 
 #Users
-@router.get('/users/{user_id}', status_code = 200)
+@router.get('/users/{user_id}', response_model = dict, status_code = 200)
 async def get_user_metrics_by_id(user_id: str,
                                 apikey: str = Header(None)
                                 ):
@@ -32,7 +32,7 @@ async def get_user_metrics_by_id(user_id: str,
     return UsersController.get_metrics_by_id(user_id)
 
 
-@router.get('/users/', status_code = 200)
+@router.get('/users/', response_model = dict, status_code = 200)
 async def get_users_metrics(apikey: str = Header(None)):
 
     auth_service.check_api_key(apikey)
