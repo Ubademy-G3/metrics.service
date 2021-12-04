@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Header, Query, Depends
 from application.controllers.courses_controller import *
-#from application.controllers.users_controller import *
+from application.controllers.users_controller import *
 #from application.controllers.payments_controller import *
 from application.services.auth import auth_service
 
@@ -22,14 +22,23 @@ async def get_all_courses_metrics(apikey: str = Header(None)):
     return CoursesController.get_metrics()
 
 
-'''#Users
+#Users
+@router.get('/users/{user_id}', status_code = 200)
+async def get_user_metrics_by_id(user_id: str,
+                                apikey: str = Header(None)
+                                ):
+
+    auth_service.check_api_key(apikey)
+    return UsersController.get_metrics_by_id(user_id)
+
+
 @router.get('/users/', status_code = 200)
 async def get_users_metrics(apikey: str = Header(None)):
 
     auth_service.check_api_key(apikey)
     return UsersController.get_metrics()
 
-
+'''
 #Payments
 @router.get('/payments/', status_code = 200)
 async def get_payments_metrics(apikey: str = Header(None)):

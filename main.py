@@ -6,4 +6,4 @@ from infrastructure.routes import metrics_router
 app = FastAPI(title = "Ubademy - Metrics service",
             description = "Metrics service API")
 
-app.include_router(metrics_router.router, prefix='/metrics', tags=['course metrics'])
+app.include_router(metrics_router.router, prefix='/metrics', tags=['metrics'])
