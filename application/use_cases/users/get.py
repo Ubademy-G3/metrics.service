@@ -26,13 +26,12 @@ def get_metrics_by_id(user_id):
             "times_pw_changed": response_json['passwordChanged']
         }
     }
-
     return result
 
 
 def get_metrics():
 
-    '''response_all_users = requests.get(USERS_SERVICE_URL,
+    response_all_users = requests.get(USERS_SERVICE_URL,
                             headers = header_users)
     response_json = response_all_users.json()
     reg_mail = 0
@@ -57,5 +56,4 @@ def get_metrics():
             "times_pw_changed": pw_changes
         }
     }
-    return result'''
-    return {"hola": "chau"}
+    return result
