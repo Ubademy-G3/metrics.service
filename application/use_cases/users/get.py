@@ -34,6 +34,7 @@ def get_metrics():
     response_all_users = requests.get(USERS_SERVICE_URL,
                             headers = header_users)
     response_json = response_all_users.json()
+    print(response_json)
     reg_mail = 0
     reg_app = 0
     log_mail = 0
