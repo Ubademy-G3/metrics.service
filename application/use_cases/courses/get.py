@@ -36,10 +36,22 @@ def get_metrics_by_id(course_id):
     }    
 
 
-def get_metrics():
+def get_metrics(category, subscription):
 
-    response_courses = requests.get(COURSES_SERVICE_URL,
+    if category is None and subscription is None:
+        response_courses = requests.get(COURSES_SERVICE_URL,
                                     headers = header_courses)
+    if category is not None and subscription is None:
+        response_courses = requests.get(COURSES_SERVICE_URL+"?category[]="+str(category),
+                                    headers = header_courses)
+    if category is not None and subscription is not None:
+        response_courses = requests.get(COURSES_SERVICE_URL+"?category[]="+str(category)+
+                                    "&subscription_type[]="+subscription,
+                                    headers = header_courses)
+    if category is None and subscription is not None:
+        response_courses = requests.get(COURSES_SERVICE_URL+"?subscription_type[]="+subscription,
+                                    headers = header_courses)
+                                    
     courses_json = response_courses.json()
     dicc = {"total_users": 0,
             "users_approved": 0,

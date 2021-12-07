@@ -9,6 +9,6 @@ class CoursesController:
 
 
     @classmethod
-    def get_metrics(cls):
+    def get_metrics(cls, category, subscription):
 
-        return get.get_metrics()
+        return get.get_metrics(category, subscription)

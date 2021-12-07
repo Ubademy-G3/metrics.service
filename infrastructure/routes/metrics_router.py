@@ -3,6 +3,7 @@ from application.controllers.courses_controller import *
 from application.controllers.users_controller import *
 from application.controllers.payments_controller import *
 from application.services.auth import auth_service
+from typing import Optional
 
 router = APIRouter()
 
@@ -16,10 +17,13 @@ async def get_courses_metrics_by_id(course_id: str,
     return CoursesController.get_metrics_by_id(course_id)
 
 @router.get('/courses/', status_code = 200)
-async def get_all_courses_metrics(apikey: str = Header(None)):
+async def get_all_courses_metrics(apikey: str = Header(None),
+                                category: Optional[int] = None,
+                                subscription: Optional[str] = None
+                                ):
 
     auth_service.check_api_key(apikey)
-    return CoursesController.get_metrics()
+    return CoursesController.get_metrics(category, subscription)
 
 
 #Users
