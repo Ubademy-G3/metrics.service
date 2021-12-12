@@ -15,6 +15,9 @@ class CoursesMetricsTest(TestCase):
     def test_courses_without_apikey(self, mock_get):
 
         mock_get.return_value.status_code = 200
+        mock_get.return_value = {
+            "message": "Error with API Key"
+        }
         response = test_app.get("/metrics/courses/")
         response_json = response.json()
 
@@ -254,6 +257,10 @@ class CoursesMetricsTest(TestCase):
     def test_users_without_apikey(self, mock_get):
 
         mock_get.return_value.status_code = 200
+        mock_get.return_value = {
+            "message": "Error with API Key"
+        }
+
         response = test_app.get("/metrics/users/")
         response_json = response.json()
 
@@ -318,6 +325,10 @@ class CoursesMetricsTest(TestCase):
     def test_payments_without_apikey(self, mock_get):
 
         mock_get.return_value.status_code = 200
+        mock_get.return_value = {
+            "message": "Error with API Key"
+        }
+        
         response = test_app.get("/metrics/payments/")
         response_json = response.json()
 
