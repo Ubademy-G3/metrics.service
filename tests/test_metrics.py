@@ -14,11 +14,11 @@ class CoursesMetricsTest(TestCase):
     @mock.patch("application.use_cases.courses.get.get_metrics")
     def test_courses_without_apikey(self, mock_get):
 
-        mock_get.return_value.status_code = 401
+        mock_get.return_value.status_code = 200
         response = test_app.get("/metrics/courses/")
         response_json = response.json()
 
-        assert response.status_code == 401
+        assert response.status_code == 200
         assert response_json["message"] == "Error with API Key"
 
 
@@ -253,11 +253,11 @@ class CoursesMetricsTest(TestCase):
     @mock.patch("application.use_cases.users.get.get_metrics")
     def test_users_without_apikey(self, mock_get):
 
-        mock_get.return_value.status_code = 401
+        mock_get.return_value.status_code = 200
         response = test_app.get("/metrics/users/")
         response_json = response.json()
 
-        assert response.status_code == 401
+        assert response.status_code == 200
         assert response_json["message"] == "Error with API Key"
 
 
@@ -317,11 +317,11 @@ class CoursesMetricsTest(TestCase):
     @mock.patch("application.use_cases.payments.get.get_metrics")
     def test_payments_without_apikey(self, mock_get):
 
-        mock_get.return_value.status_code = 401
+        mock_get.return_value.status_code = 200
         response = test_app.get("/metrics/payments/")
         response_json = response.json()
 
-        assert response.status_code == 401
+        assert response.status_code == 200
         assert response_json["message"] == "Error with API Key"
 
 
