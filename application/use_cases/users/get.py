@@ -3,6 +3,9 @@ import requests
 import json
 from dotenv import load_dotenv
 load_dotenv()
+import logging
+
+logger = logging.getLogger(__name__)
 
 USERS_SERVICE_API_KEY = os.getenv('USERS_SERVICE_API_KEY')
 USERS_SERVICE_URL = "https://staging-users-service.herokuapp.com/users"
@@ -12,10 +15,13 @@ header_users = {"authorization": USERS_SERVICE_API_KEY}
 
 def get_metrics_by_id(user_id):
 
+    logger.info("Get metrics of user %s", user_id)
+    logger.debug("Making request to users service")
     response = requests.get(USERS_SERVICE_URL+"/"+user_id,
                             headers = header_users)
 
     response_json = response.json()
+    logger.debug("Response: %s", str(response_json))
     result = {
         "user_id": user_id,
         "metrics": {
@@ -31,9 +37,12 @@ def get_metrics_by_id(user_id):
 
 def get_metrics():
 
+    logger.info("Get users metrics")
+    logger.debug("Making request to users service")
     response_all_users = requests.get(USERS_SERVICE_URL,
                             headers = header_users)
     response_json = response_all_users.json()
+    logger.debug("Response: %s", str(response_json))
     
     reg_mail = 0
     reg_app = 0
