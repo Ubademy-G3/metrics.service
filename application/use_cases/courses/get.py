@@ -77,7 +77,7 @@ def get_metrics(category, subscription):
             "graded_exams": 0,
             "passed_exams": 0
         }
-
+    logger.debug("Making request to exams service...")
     for course in courses_json['courses']:
     
         response_exams = requests.get(EXAMS_SERVICE_URL+course['id'],
