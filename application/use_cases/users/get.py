@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 USERS_SERVICE_API_KEY = os.getenv('USERS_SERVICE_API_KEY')
-USERS_SERVICE_URL = "https://staging-users-service.herokuapp.com/users"
+USERS_SERVICE_URL = "https://staging-users-service-v2.herokuapp.com/users"
 
 
 header_users = {"authorization": USERS_SERVICE_API_KEY}

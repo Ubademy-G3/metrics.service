@@ -9,14 +9,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 COURSES_SERVICE_API_KEY = os.getenv('COURSES_SERVICE_API_KEY')
-COURSES_SERVICE_URL = "https://staging-courses-service-app.herokuapp.com/courses/"
+COURSES_SERVICE_URL = "https://staging-courses-service-app-v2.herokuapp.com/courses/"
 
 EXAMS_SERVICE_API_KEY = os.getenv('EXAMS_SERVICE_API_KEY')
 EXAMS_SERVICE_URL = "https://staging-exams-service.herokuapp.com/exams/solutions/course/"
 
 header_courses = {"apikey": COURSES_SERVICE_API_KEY}
 header_exams = {"apikey": EXAMS_SERVICE_API_KEY}
-
 
 def get_metrics_by_id(course_id):
 
@@ -38,7 +37,7 @@ def get_metrics_by_id(course_id):
     courses_json['metrics']['approval_rate'] = exams_json['approval_rate']
     courses_json['metrics']['graded_exams'] = exams_json['amount_graded']
     courses_json['metrics']['passed_exams'] = exams_json['approval_rate'] * exams_json['amount']
-    
+
     return {
         "course_id": course_id,
         "metrics": courses_json
