@@ -1,0 +1,7 @@
+[report]
+omit = 
+        *__init__*
+        *infrastructure/routes/*
+        *monitoring/datadog.yml*
+        *deploy/heroku-entrypoint.sh*
+        *application/use_cases/*
