@@ -99,4 +99,4 @@ This command deploys the service:
 ```docker-compose exec web pytest .```
 
 
-You can try it out at <https://https://staging-metrics-service.herokuapp.com/docs>
+You can try it out at <https://staging-metrics-service.herokuapp.com/docs>
