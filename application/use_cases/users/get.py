@@ -27,8 +27,8 @@ def get_metrics_by_id(user_id):
         "metrics": {
             "register_with_email": (response_json['registerType'] == "not-google"),
             "register_with_app": (response_json['registerType'] == "google"),
-            "login_with_email": (response_json['loginType'] == "not-google"),
-            "login_with_app": (response_json['loginType'] == "google"),
+            "login_with_email": (response_json['registerType'] == "not-google"),
+            "login_with_app": (response_json['registerType'] == "google"),
             "times_pw_changed": response_json['passwordChanged']
         }
     }
@@ -52,8 +52,8 @@ def get_metrics():
     for user in response_json:
         reg_mail += (1 if user['registerType'] == "not-google" else 0)
         reg_app += (1 if user['registerType'] == "google" else 0)
-        log_mail += (1 if user['loginType'] == "not-google" else 0)
-        log_app += (1 if user['loginType'] == "google" else 0)
+        log_mail += (1 if user['registerType'] == "not-google" else 0)
+        log_app += (1 if user['registerType'] == "google" else 0)
         pw_changes += user['passwordChanged']
 
     result = {
