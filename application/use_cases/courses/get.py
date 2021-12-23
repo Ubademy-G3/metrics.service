@@ -91,7 +91,7 @@ def get_metrics(category, subscription):
         dicc['approval_rate'] += exams_json['approval_rate']
         dicc['graded_exams'] += exams_json['amount_graded']
         dicc['passed_exams'] += exams_json['approval_rate'] * exams_json['amount_graded']
-    
+    dicc['approval_rate'] /= courses_json['amount']
     return {
         "courses_amount": courses_json['amount'],
         "metrics": dicc
