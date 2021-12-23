@@ -36,7 +36,7 @@ def get_metrics_by_id(course_id):
     courses_json['metrics']['average_score'] = exams_json['average_score']
     courses_json['metrics']['approval_rate'] = exams_json['approval_rate']
     courses_json['metrics']['graded_exams'] = exams_json['amount_graded']
-    courses_json['metrics']['passed_exams'] = exams_json['approval_rate'] * exams_json['amount']
+    courses_json['metrics']['passed_exams'] = exams_json['approval_rate'] * exams_json['amount_graded']
 
     return {
         "course_id": course_id,
@@ -90,7 +90,7 @@ def get_metrics(category, subscription):
         dicc['average_score'] += exams_json['average_score']
         dicc['approval_rate'] += exams_json['approval_rate']
         dicc['graded_exams'] += exams_json['amount_graded']
-        dicc['passed_exams'] += exams_json['approval_rate'] * exams_json['amount']
+        dicc['passed_exams'] += exams_json['approval_rate'] * exams_json['amount_graded']
     
     return {
         "courses_amount": courses_json['amount'],
