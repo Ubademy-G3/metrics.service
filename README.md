@@ -53,6 +53,11 @@ Service for obtain metrics of Courses (with their exams), Users and Payments mic
     └── test_metrics.py
 ```
 
+# Tech Stack
+
+* Python 3.x
+* FastAPI (as web framework to building the API with Python)
+
 # Local Environment 
 
 ## Requirements 
